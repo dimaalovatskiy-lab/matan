@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Колоквіум з матаналізу — підготовка</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+  onerror="var s=document.createElement('script');s.src='https://unpkg.com/mathjax@3/es5/tex-svg.js';document.head.appendChild(s);"></script>
+<style>
+:root{
+  --bg:#12151c; --card:#1a1f29; --text:#e6e9ef; --muted:#9aa4b2;
+  --accent:#ff5252; --accent-strong:#e53935; --accent-soft:#2a1a1c;
+  --border:#2a3140; --ok:#4cd48a; --warn:#e6a35c; --bad:#ff7a7a;
+  --shadow:0 2px 10px rgba(0,0,0,.35); --mark:#7a2a2a;
+  --why-bg:#1e2a22; --why-border:#4cd48a;
+}
+[data-theme="light"]{
+  --bg:#f7f8fa; --card:#fff; --text:#1f2430; --muted:#5b6472;
+  --accent:#e53935; --accent-strong:#c62828; --accent-soft:#fdecea;
+  --border:#e3e7ee; --ok:#1a9e5c; --warn:#d9822b; --bad:#d64545;
+  --shadow:0 2px 8px rgba(20,30,60,.06); --mark:#ffe58a;
+  --why-bg:#eaf7ef; --why-border:#1a9e5c;
+}
+*{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.55;transition:background .2s,color .2s;
+  overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
+mjx-container{max-width:100%!important;overflow-x:auto!important;overflow-y:hidden}
+mjx-container[jax="SVG"][display="true"]{display:block;text-align:left;padding:4px 0}
+header{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow);padding:10px 16px}
+.topbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:1280px;margin:0 auto}
+h1{font-size:1.1rem;margin:0;flex:1 1 200px;min-width:160px}
+h1 small{font-weight:400;color:var(--muted);font-size:.78rem;display:block}
+.search{flex:2 1 280px;position:relative;min-width:200px}
+.search input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--border);border-radius:10px;
+  background:var(--bg);color:var(--text);font-size:.95rem;outline:none}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search .ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.controls{display:flex;gap:8px;flex-wrap:wrap;max-width:1280px;margin:10px auto 0;align-items:center}
+.chip{padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--card);
+  color:var(--muted);cursor:pointer;font-size:.85rem;user-select:none;transition:.15s;white-space:nowrap}
+.chip:hover{border-color:var(--accent)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.spacer{flex:1}
+button.icon{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
+  cursor:pointer;color:var(--text);font-size:.9rem;white-space:nowrap}
+button.icon:hover{border-color:var(--accent)}
+button.icon.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.progress-wrap{max-width:1280px;margin:8px auto 0;display:flex;align-items:center;gap:10px;
+  font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+main{max-width:1280px;margin:0 auto;padding:16px}
+.module-head{margin:26px 0 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.module-head h2{margin:0;font-size:1.05rem;color:var(--accent)}
+.module-head .sub{color:var(--muted);font-size:.85rem}
+
+/* === Режим "блоки" (grid) === */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px}
+/* === Режим "рядки" (list) === */
+main.list .grid{display:flex;flex-direction:column;gap:10px}
+main.list .card{width:100%}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);
+  padding:14px 16px;display:flex;flex-direction:column;gap:8px;position:relative;transition:.15s;
+  min-width:0;max-width:100%}
+.card:hover{border-color:var(--accent)}
+.card.done{border-left:4px solid var(--ok)}
+.card h3{margin:0;font-size:1rem;line-height:1.35;padding-right:34px;overflow-wrap:anywhere}
+.card .intro{font-size:.86rem;color:var(--muted);font-style:italic;margin:2px 0 4px;line-height:1.5}
+.card .common-def{font-size:.88rem;border-left:3px solid var(--accent);padding-left:10px;margin:4px 0 8px;
+  overflow-wrap:anywhere}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.badge{font-size:.72rem;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);
+  border:1px solid transparent;white-space:nowrap}
+.section-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);
+  font-weight:600;margin:8px 0 2px}
+.card p{margin:0}
+.card .body{font-size:.9rem;overflow-wrap:anywhere}
+
+details.sub{border:1px solid var(--border);border-radius:10px;padding:6px 10px;margin-top:6px;
+  background:rgba(255,255,255,.015);min-width:0;max-width:100%;overflow-wrap:anywhere}
+details.sub summary{cursor:pointer;font-weight:600;font-size:.88rem;outline:none;list-style:none;
+  display:flex;align-items:flex-start;gap:8px;color:var(--text);min-width:0;flex-wrap:wrap}
+details.sub summary::-webkit-details-marker{display:none}
+details.sub summary::before{content:"▸";color:var(--accent);transition:transform .15s;display:inline-block;
+  flex-shrink:0;margin-top:1px}
+details.sub[open] summary::before{transform:rotate(90deg)}
+details.sub[open]{background:rgba(255,255,255,.03)}
+.sub-num{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--accent);
+  border-radius:5px;padding:1px 6px;flex-shrink:0;letter-spacing:.02em;white-space:nowrap}
+.sub-title{flex:1 1 200px;min-width:0;overflow-wrap:anywhere}
+.sub-body{margin:8px 0 0;font-size:.88rem;padding-left:4px;overflow-wrap:anywhere}
+.sub-body .label{font-weight:600;color:var(--accent);font-size:.8rem;margin-right:4px}
+.proof-step{margin:6px 0;padding-left:12px;border-left:2px solid var(--accent);font-size:.86rem;
+  overflow-wrap:anywhere}
+.hint{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:6px;
+  padding:7px 10px;font-size:.83rem;margin:6px 0;overflow-wrap:anywhere}
+.why{background:var(--why-bg);border-left:3px solid var(--why-border);border-radius:6px;
+  padding:7px 10px;font-size:.83rem;margin:6px 0;overflow-wrap:anywhere}
+.why .label{color:var(--why-border);font-weight:700}
+.check{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:.75rem;color:transparent;transition:.15s;z-index:2}
+.check:hover{border-color:var(--ok)}
+.card.done .check{background:var(--ok);border-color:var(--ok);color:#fff}
+mark{background:var(--mark);color:#fff;border-radius:3px;padding:0 2px}
+[data-theme="light"] mark{color:#1f2430}
+.empty{text-align:center;color:var(--muted);padding:40px 10px;font-size:.95rem}
+footer{max-width:1280px;margin:30px auto;padding:16px;color:var(--muted);font-size:.8rem;
+  border-top:1px solid var(--border);text-align:center}
+@media (max-width:640px){
+  h1{font-size:.98rem}
+  .grid{grid-template-columns:1fr}
+  main{padding:12px}
+  .card{padding:12px 13px}
+  .sub-body,.proof-step,.hint,.why{font-size:.85rem}
+  button.icon{padding:6px 8px;font-size:.82rem}
+  .chip{padding:5px 10px;font-size:.8rem}
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <div class="topbar">
+    <h1>Колоквіум з матаналізу<small>модулі 1–2 · 150 підпунктів</small></h1>
+    <div class="search">
+      <span class="ico">🔍</span>
+      <input id="q" type="search" placeholder="Пошук по всіх темах і підпунктах…" autocomplete="off">
+    </div>
+    <button class="icon" id="layoutBtn" title="Режим відображення">☰ Рядки</button>
+    <button class="icon" id="themeBtn" title="Тема">☀️</button>
+    <button class="icon" id="resetBtn" title="Скинути прогрес">♻️</button>
+  </div>
+  <div class="controls" id="modFilters">
+    <span class="chip active" data-mod="all">Усі модулі</span>
+    <span class="chip" data-mod="1">Модуль 1</span>
+    <span class="chip" data-mod="2">Модуль 2</span>
+    <span class="spacer"></span>
+    <span class="chip active" data-type="all">Усі</span>
+    <span class="chip" data-type="noproof">Без доведення</span>
+    <span class="chip" data-type="proof">З доведенням</span>
+  </div>
+  <div class="progress-wrap">
+    <span>Знайдено: <b id="matchCnt">0</b> тем / <b id="subCnt">0</b> підпунктів</span>
+    <span style="margin-left:auto">Вивчено: <b id="doneCnt">0</b></span>
+  </div>
+</header>
+
+<main id="app" class="grid-mode"></main>
+<footer>Дані збережено локально. Працює офлайн. • Модуль 1 + Модуль 2 (150 підпунктів)</footer>
+
+<script>
+/* =========================================================
+   МОДУЛЬ 1 — 75 підпунктів
+   ========================================================= */
+const DATA_M1 = [
+{id:'m1-sets',module:1,title:'Множини та операції над ними',
+ intro:'База всього курсу: мова множин, операції, відношення. Без вільного володіння ними не зрозуміти ні границь, ні неперервності. На колоквіумі часто просять довести тотожність або знайти образ/прообраз.',
+ def:'Універсальна множина $M$; $A\\cap B$, $A\\cup B$, $A\\setminus B$, $A\\Delta B=(A\\setminus B)\\cup(B\\setminus A)$, $CA=M\\setminus A$.',
+ subs:[
+  {num:'1.2',title:'Аксіоми натуральних чисел',body:'1) Якщо $E\\subset\\mathbb N$, $1\\in E$ і $x\\in E\\Rightarrow x+1\\in E$, то $E=\\mathbb N$. 2) За $n$ безпосередньо йде $n+1$. 3) Будь-яка непорожня підмножина $\\mathbb N$ має найменший елемент.',why:'Це фундамент індукції. Без аксіоми 3 не довести існування найменшого елемента (потрібно для доведень «від супротивного»).'},
+  {num:'1.7',title:'Відношення часткового порядку, УП, протилежний ЧУП',body:'$\\preceq$ — ЧУП, якщо рефлексивне, антисиметричне, транзитивне. $(M,\\preceq)$ — УП. Протилежний: $(M,\\succeq)$, де $a\\succeq b\\iff b\\preceq a$.',why:'Порядок — це те, що дозволяє говорити про «більше/менше». На ньому тримаються супремум, монотонність, межі.'},
+  {num:'1.9',title:'Декартів добуток, бінарне відношення',body:'$X\\times Y=\\{(x,y)\\mid x\\in X,y\\in Y\\}$. $\\Gamma\\subset X\\times Y$ — бінарне відношення. Обернене: $\\Gamma^{-1}=\\{(y,x)\\mid(x,y)\\in\\Gamma\\}$.',why:'Через бінарне відношення означають функцію (як функціональне відношення). Це основа формального означення відображення.'},
+  {num:'1.10',title:'Замкнена множина, замикання, точка дотику',body:'$x$ — точка дотику $A$, якщо кожен її окіл перетинає $A$. $\\bar A=\\{x\\mid x\\text{ — точка дотику}\\}$. $A$ замкнена $\\iff A=\\bar A$.',why:'Точки дотику — «межа» множини. Через них формулюють замкненість і компактність.'},
+  {num:'1.16',title:'Оборотне, обернене відображення',body:'$f$ оборотне, якщо $\\Gamma^{-1}$ функціональне. Тоді $f^{-1}=(Y,X,\\Gamma^{-1})$. $f$ оборотне $\\iff f$ ін\'єктивне.',why:'Обернена функція — ключ до теорем про неперервність оберненої та про похідну оберненої.'},
+  {num:'1.18',title:'Окіл точки',body:'$U$ — окіл $a$, якщо $\\exists\\varepsilon>0:\\ (a-\\varepsilon,a+\\varepsilon)\\subset U$. Проколотий: $U\\setminus\\{a\\}$.',why:'Окіл — «локальний» інструмент: границя, неперервність, гранична точка — усе через нього.'},
+  {num:'1.19',title:'Перша проекція бінарного відношення',body:'$\\mathrm{pr}_1\\Gamma=\\{x\\in X\\mid\\exists y\\in Y:(x,y)\\in\\Gamma\\}$.',why:'Проекція — це «область визначення» відношення. Друга проекція — «область значень».'},
+  {num:'1.20',title:'Перший переріз бінарного відношення',body:'$\\Gamma_1(x)=\\{y\\in Y\\mid(x,y)\\in\\Gamma\\}$.',why:'Переріз — це «значення в точці» для відношення. Для функції переріз — одноелементна множина $\\{f(x)\\}$.'},
+  {num:'1.29',title:'Функція: область відправлення/прибуття, визначення/значень',body:'$f=(X,Y,\\Gamma)$, $X$ — область відправлення, $Y$ — прибуття. $D_f=\\mathrm{pr}_1\\Gamma$, $E_f=\\mathrm{pr}_2\\Gamma$.',why:'Розрізняти $Y$ (область прибуття) і $E_f$ (фактичні значення) — типова помилка.'},
+  {num:'1.Д1',title:'$A\\subset B\\Rightarrow A\'\\subset B\'$',body:'Похідна множина: $A\'$ — множина граничних точок $A$.',why:'Монотонність похідної множини — частий крок у доведеннях про замикання.',proof:['Нехай $x\\in A\'$ — гранична точка $A$. Тоді кожен проколотий окіл $x$ перетинає $A\\subset B$, отже перетинає $B$, тому $x\\in B\'$.']},
+  {num:'1.Д2',title:'$f(\\bigcap A_n)\\subset f(\\bigcup A_n)=$',body:'Образ об\'єднання дорівнює об\'єднанню образів; для перетину — лише включення.',why:'Класика: для прообразів $\\cap$ зберігається, а для образів — ні.',proof:['$\\bigcup$: $y\\in f(\\bigcup A_n)\\iff\\exists x\\in\\bigcup A_n:y=f(x)\\iff\\exists n\\exists x\\in A_n:y=f(x)\\iff\\exists n:y\\in f(A_n)\\iff y\\in\\bigcup f(A_n)$.','$\\bigcap$: якщо $y\\in f(\\bigcap A_n)$, то $\\exists x\\in\\bigcap A_n$ з $f(x)=y$, отже $x\\in A_n\\ \\forall n$ і $y\\in f(A_n)\\ \\forall n$, тобто $y\\in\\bigcap f(A_n)$.','Обернене хибне: $f(x)=x^2$, $A_1=\\mathbb R^-$, $A_2=\\mathbb R^+$. Тоді $f(A_1\\cap A_2)=f(\\{0\\})=\\{0\\}$, а $f(A_1)\\cap f(A_2)=\\mathbb R^+\\cap\\mathbb R^+=\\mathbb R^+$.']},
+  {num:'1.Д3',title:'$f^{-1}(\\bigcap A\'_n)=\\bigcap f^{-1}(A\'_n)$, $f^{-1}(\\bigcup A\'_n)=\\bigcup f^{-1}(A\'_n)$',body:'Прообраз зберігає $\\cap$ і $\\cup$ (на відміну від образу).',why:'Тому прообрази «зручніші» за образи.',proof:['$x\\in f^{-1}(\\bigcap A\'_n)\\iff f(x)\\in\\bigcap A\'_n\\iff\\forall n\\ f(x)\\in A\'_n\\iff\\forall n\\ x\\in f^{-1}(A\'_n)\\iff x\\in\\bigcap f^{-1}(A\'_n)$.','Аналогічно для $\\bigcup$: $\\exists n$ замість $\\forall n$.']},
+  {num:'1.Д4',title:'$f^{-1}(A\'\\setminus B\')=f^{-1}(A\'\\Delta B\')$',body:'Прообраз різниці та симетричної різниці.',why:'Продовження ідеї «прообраз зберігає всі операції».',proof:['$x\\in f^{-1}(A\'\\setminus B\')\\iff f(x)\\in A\'\\setminus B\'\\iff (f(x)\\in A\')\\land(f(x)\\notin B\')\\iff (x\\in f^{-1}(A\'))\\land(x\\notin f^{-1}(B\'))\\iff x\\in f^{-1}(A\')\\setminus f^{-1}(B\')$.','Для $\\Delta$: $f^{-1}(A\'\\Delta B\')=f^{-1}((A\'\\setminus B\')\\cup(B\'\\setminus A\'))=f^{-1}(A\')\\Delta f^{-1}(B\')$ — за попереднім і збереженням $\\cup$.']},
+  {num:'1.Д5',title:'$O(1)\\cdot O(1)=O(1)$, $O(1)\\cdot o(1)=o(1)$, $o(1)\\cdot o(1)=o(1)$',body:'Добутки Ландау.',why:'Правила «арифметики» асимптотик.',proof:['$|a_n|\\le M$, $|b_n|\\le N\\Rightarrow|a_nb_n|\\le MN$ — $O(1)\\cdot O(1)=O(1)$.','$|a_n|\\le M$, $b_n\\to0\\Rightarrow|a_nb_n|\\le M|b_n|\\to0$ — $O(1)\\cdot o(1)=o(1)$.','$a_n\\to0$, $b_n\\to0\\Rightarrow|a_nb_n|\\to0$ — $o(1)\\cdot o(1)=o(1)$.']},
+  {num:'1.Д6',title:'$O(1)+O(1)=O(1)$, $O(1)+o(1)=O(1)$, $o(1)+o(1)=o(1)$',body:'Суми Ландау.',why:'Так само, як добутки — для спрощення.',proof:['$|a_n|\\le M$, $|b_n|\\le N\\Rightarrow|a_n+b_n|\\le M+N$ — $O(1)$.','$|a_n|\\le M$, $b_n\\to0\\Rightarrow|a_n+b_n|\\le M+|b_n|\\le M+1$ — $O(1)$.','$a_n\\to0$, $b_n\\to0\\Rightarrow a_n+b_n\\to0$ — $o(1)$.']}
+ ]},
+{id:'m1-landau',module:1,title:'Символи Ландау та еквівалентність',
+ intro:'Мова «наскільки швидко» щось прямує до нуля/нескінченності. Незамінна при обчисленні границь і в теорії рядів.',
+ def:'$a_n=o(b_n)\\iff a_n/b_n\\to0$; $a_n=O(b_n)\\iff|a_n/b_n|$ обмежене; $a_n\\sim b_n\\iff a_n/b_n\\to1$.',
+ subs:[
+  {num:'1.1',title:'$a_n=o(b_n)$, критерій о-малості послідовності',body:'$a_n=o(b_n)\\iff a_n/b_n\\to0$. Критерій: $\\forall\\varepsilon>0\\ \\exists N\\ \\forall n>N:\\ |a_n|\\le\\varepsilon|b_n|$.',why:'$o$ — «значно менше». Наприклад, $1/n^2=o(1/n)$.'},
+  {num:'1.26',title:'Символи Ландау',body:'$o,O,\\sim$; $O(1)\\cdot o(1)=o(1)$; $a_n\\sim b_n\\iff a_n=b_n(1+o(1))$.',why:'Еквівалентність $\\sim$ — найсильніше спрощення: можна заміняти множники, але не доданки.'}
+ ]},
+{id:'m1-seq-def',module:1,title:'Послідовності: означення та види',
+ intro:'Послідовність — це функція на натуральних числах. Майже вся теорія границь будується саме на ній.',
+ def:'Послідовність — відображення $\\mathbb N\\to\\mathbb R$, $n\\mapsto a_n$.',
+ subs:[
+  {num:'1.13',title:'Найменший елемент УП, мажоранта множини',body:'$m=\\min A$, якщо $m\\in A$ і $\\forall a\\in A:\\ a\\succeq m$. $M$ — мажоранта $A$, якщо $\\forall a\\in A:\\ a\\preceq M$.',why:'Мажоранта — «стеля» множини. Найменша мажоранта — супремум.'},
+  {num:'1.21',title:'Підпослідовність',body:'$a_{n_k}$, де $n_1<n_2<\\dots$ — зростаюча послідовність індексів.',why:'Підпослідовності — інструмент Больцано–Вейєрштрасса.'},
+  {num:'1.23',title:'Послідовність',body:'Відображення $\\mathbb N\\to\\mathbb R$: $a_1,a_2,\\dots$.',why:'Формально — це функція, тому всі означення границь переносяться.'},
+  {num:'1.24',title:'Послідовність з обмеженою варіацією',body:'$\\sum_{n=1}^\\infty|a_{n+1}-a_n|<\\infty$. Збігається (бо фундаментальна).',why:'Приклад: часткові суми збіжного ряду.'},
+  {num:'1.30',title:'Часткова границя послідовності',body:'Границя будь-якої збіжної підпослідовності. Множина часткових границь замкнена.',why:'$\\varlimsup$ і $\\varliminf$ — це найбільша і найменша часткові границі.'},
+  {num:'1.Д42',title:'Про послідовність з обмеженою варіацією',body:'Якщо $\\sum|a_{n+1}-a_n|<\\infty$, то $(a_n)$ збігається.',why:'Корисний критерій для доведення збіжності.',proof:['$|a_m-a_n|\\le\\sum_{k=n}^{m-1}|a_{k+1}-a_k|\\to0$ при $m,n\\to\\infty$ (залишок збіжного ряду), отже послідовність фундаментальна.','За критерієм Коші вона збігається.']}
+ ]},
+{id:'m1-lim',module:1,title:'Границя послідовності',
+ intro:'Центральне поняття всього курсу. Два означення (метричне і топологічне) еквівалентні — це перше, що питають на колоквіумі.',
+ def:'$a_n\\to a$: $\\forall\\varepsilon>0\\ \\exists N\\ \\forall n>N:\\ |a_n-a|<\\varepsilon$.',
+ subs:[
+  {num:'1.4',title:'Верхня границя послідовності',body:'$\\varlimsup a_n=\\lim_{n}\\sup_{k\\ge n}a_k$. Завжди $\\varliminf\\le\\varlimsup$.',why:'«Границя зверху»: якщо $\\varlimsup=\\varliminf$, то звичайна границя існує.'},
+  {num:'1.12',title:'Метричне означення границі послідовності',body:'$\\forall\\varepsilon>0\\ \\exists N:\\ \\forall n>N\\ |a_n-a|<\\varepsilon$.',why:'«Епсилон-дельта»: скільки завгодно близько, починаючи з деякого номера.'},
+  {num:'1.27',title:'Топологічне означення границі послідовності',body:'Для будь-якого околу $U\\ni a$ $\\exists N:\\ \\forall n>N\\ a_n\\in U$. Еквівалентне метричному.',why:'Те саме, але мовою відкритих множин.'},
+  {num:'1.Д8',title:'Больцано–Вейєрштрасса',body:'З будь-якої обмеженої послідовності можна виділити збіжну підпослідовність.',why:'Головний інструмент доведення існування границі.',hint:'Ділимо відрізок навпіл, обираємо половину з нескінченною кількістю членів.',proof:['Нехай $|a_n|\\le M$. Ділимо $[-M,M]$ навпіл — хоча б одна половина $I_1$ містить нескінченно багато членів.','Повторюємо: $I_1\\supset I_2\\supset\\dots$, $|I_k|=2M/2^k\\to0$, у кожному нескінченно багато членів.','За теоремою про вкладені відрізки $\\bigcap I_k=\\{c\\}$. Обираємо $a_{n_k}\\in I_k$, $n_k$ зростаючі. Тоді $|a_{n_k}-c|\\le|I_k|\\to0$, отже $a_{n_k}\\to c$.']},
+  {num:'1.Д22',title:'Зв\'язок метричного та топологічного означень границі',body:'Еквівалентні.',why:'Мова «околів» і мова «$\\varepsilon$» описують те саме.',proof:['Метричне $\\Rightarrow$ топологічне: для околу $U\\ni a$ знайдеться $\\varepsilon$-куля $\\subset U$; беремо $\\varepsilon$ з означення.','Топологічне $\\Rightarrow$ метричне: для $\\varepsilon>0$ беремо $U=(a-\\varepsilon,a+\\varepsilon)$ і $N$ з топологічного означення.']},
+  {num:'1.Д37',title:'Підпослідовності збіжної послідовності',body:'Якщо $a_n\\to a$, то будь-яка підпослідовність $a_{n_k}\\to a$.',why:'Часто використовується: «підпослідовність збіжної збігається до тієї ж границі».',proof:['Нехай $\\varepsilon>0$, $N$ — з означення. Для $k>N$ маємо $n_k\\ge k>N$, отже $|a_{n_k}-a|<\\varepsilon$.']},
+  {num:'1.Д39',title:'Про єдиність границі',body:'Границя послідовності єдина.',why:'Без цього не можна коректно писати $\\lim a_n$ як число.',proof:['Нехай $a_n\\to a$ і $a_n\\to b$, $a\\ne b$. Покладемо $\\varepsilon=|a-b|/2>0$.','Знайдуться $N_1,N_2$: $|a_n-a|<\\varepsilon$ при $n>N_1$, $|a_n-b|<\\varepsilon$ при $n>N_2$.','Для $n>\\max(N_1,N_2)$: $|a-b|\\le|a-a_n|+|a_n-b|<2\\varepsilon=|a-b|$ — суперечність.']},
+  {num:'1.Д41',title:'Про обмеженість зверху збіжної послідовності',body:'Збіжна послідовність обмежена.',why:'Обмеженість — необхідна умова збіжності.',proof:['Нехай $a_n\\to a$. Для $\\varepsilon=1$ $\\exists N:\\ \\forall n>N\\ |a_n-a|<1$, отже $|a_n|<|a|+1$.','Покладемо $M=\\max(|a_1|,\\dots,|a_N|,|a|+1)$ — тоді $|a_n|\\le M$ для всіх $n$.']},
+  {num:'1.Д43',title:'Про послідовності з різними границями',body:'Якщо $a_n\\to a$, $b_n\\to b$, $a<b$, то $\\exists N:\\ \\forall n>N\\ a_n<b_n$.',why:'Дозволяє «переходити до границі в нерівностях».',proof:['Покладемо $\\varepsilon=(b-a)/2>0$. $\\exists N_1:\\ a_n<a+\\varepsilon=(a+b)/2$; $\\exists N_2:\\ b_n>b-\\varepsilon=(a+b)/2$.','Для $n>\\max(N_1,N_2)$: $a_n<(a+b)/2<b_n$.']}
+ ]},
+{id:'m1-limprops',module:1,title:'Властивості границь послідовностей',
+ intro:'Арифметика границь: сума, добуток, частка. Плюс «двох поліцаїв» — головний інструмент затискання.',
+ def:'$\\lim(a_n\\pm b_n)=\\lim a_n\\pm\\lim b_n$; $\\lim(a_nb_n)=\\lim a_n\\cdot\\lim b_n$; $\\lim(a_n/b_n)=\\lim a_n/\\lim b_n$ при $\\lim b_n\\ne0$.',
+ subs:[
+  {num:'1.5',title:'Визначення арифметичних дій на $\\bar{\\mathbb R}$',body:'$+\\infty+a=+\\infty$; $+\\infty\\cdot a=+\\infty$ при $a>0$; $\\infty-\\infty$ не визначено.',why:'Розширена числова пряма.'},
+  {num:'1.Д10',title:'Границя відношення часткових сум',body:'Якщо $a_n\\to a$, то $\\frac{a_1+\\dots+a_n}{n}\\to a$ (середнє арифметичне).',why:'«Регуляризація»: середні збігаються навіть тоді, коли послідовність «стрибає».',proof:['Нехай $\\varepsilon>0$. $\\exists N_1:\\ \\forall n>N_1\\ |a_n-a|<\\varepsilon/2$.','$\\left|\\frac{1}{n}\\sum_{k=1}^n a_k-a\\right|=\\left|\\frac{1}{n}\\sum_{k=1}^n(a_k-a)\\right|\\le\\frac{1}{n}\\sum_{k=1}^{N_1}|a_k-a|+\\frac{\\varepsilon}{2}$.','Перший доданок $\\to0$ при $n\\to\\infty$. Отже для великих $n$ сума $<\\varepsilon$.']},
+  {num:'1.Д14',title:'Границя $1/y_n$ та частки двох послідовностей',body:'Якщо $y_n\\to b\\ne0$, $y_n\\ne0$, то $1/y_n\\to1/b$; $\\frac{x_n}{y_n}\\to\\frac{a}{b}$.',why:'Частка — це добуток на обернену.',proof:['$\\left|\\frac{1}{y_n}-\\frac{1}{b}\\right|=\\frac{|b-y_n|}{|y_n||b|}$. Оскільки $y_n\\to b\\ne0$, то $\\exists\\delta>0:\\ |y_n|>\\delta$ для великих $n$, отже $\\frac{|b-y_n|}{|y_n||b|}\\le\\frac{|b-y_n|}{\\delta|b|}\\to0$.','Частка: $\\frac{x_n}{y_n}=x_n\\cdot\\frac{1}{y_n}\\to a\\cdot\\frac{1}{b}$.']},
+  {num:'1.Д15',title:'Границя середніх для збіжної послідовності',body:'Якщо $a_n\\to a$, то $\\frac{a_1+\\dots+a_n}{n}\\to a$.',why:'Той самий факт, що й 1.Д10.',proof:['Див. 1.Д10 (той самий факт).']},
+  {num:'1.Д16',title:'Границя суми та добутку двох послідовностей',body:'$\\lim(a_n+b_n)=a+b$; $\\lim(a_nb_n)=ab$.',why:'Базові правила арифметики границь.',proof:['Сума: $|(a_n+b_n)-(a+b)|\\le|a_n-a|+|b_n-b|<\\varepsilon/2+\\varepsilon/2=\\varepsilon$.','Добуток: $|a_nb_n-ab|\\le|a_n||b_n-b|+|b_n||a_n-a|$; $|a_n|$ обмежене, $|b_n|$ обмежене, обидва доданки $\\to0$.']},
+  {num:'1.Д38',title:'Про двох поліцаїв (для послідовностей)',body:'Якщо $a_n\\le c_n\\le b_n$, $a_n\\to L$, $b_n\\to L$, то $c_n\\to L$.',why:'Головний інструмент обчислення границь «затисканням».',proof:['Нехай $\\varepsilon>0$. $\\exists N_1:\\ a_n>L-\\varepsilon$ при $n>N_1$; $\\exists N_2:\\ b_n<L+\\varepsilon$ при $n>N_2$.','Для $n>\\max(N_1,N_2)$: $L-\\varepsilon<a_n\\le c_n\\le b_n<L+\\varepsilon$, отже $|c_n-L|<\\varepsilon$.']}
+ ]},
+{id:'m1-limsup',module:1,title:'Верхня та нижня границі. Супремум',
+ intro:'$\\varlimsup$ і $\\varliminf$ описують «граничну поведінку» навіть тоді, коли звичайної границі немає.',
+ def:'$\\sup A$ — найменша мажоранта. $\\varlimsup a_n=\\lim\\sup_{k\\ge n}a_k$, $\\varliminf a_n=\\lim\\inf_{k\\ge n}a_k$.',
+ subs:[
+  {num:'1.15',title:'Обмежена знизу множина',body:'$A$ обмежена знизу, якщо $\\exists m:\\ \\forall a\\in A\\ a\\ge m$.',why:'Дзеркально до обмеженості зверху.'},
+  {num:'1.Д20',title:'Друга властивість верхньої границі',body:'$\\varlimsup a_n$ — найбільша часткова границя; $\\varliminf$ — найменша.',why:'Це «робоче» означення $\\varlimsup$.',proof:['Нехай $L=\\varlimsup a_n$. За означенням $\\sup_{k\\ge n}a_k\\downarrow L$.','Для $\\varepsilon>0$ існує $N$: $\\sup_{k\\ge N}a_k<L+\\varepsilon$, отже $a_k<L+\\varepsilon$ для всіх $k\\ge N$.','З іншого боку, $\\sup_{k\\ge n}a_k>L-\\varepsilon$ для всіх $n$, тому нескінченно багато $a_k>L-\\varepsilon$.','Звідси: $L$ — границя деякої підпослідовності, і жодна часткова границя не перевищує $L$.']},
+  {num:'1.Д31',title:'Монотонність супремуму',body:'$A\\subset B\\Rightarrow\\sup A\\le\\sup B$.',why:'Часто використовується в ланцюжках нерівностей.',proof:['Кожна мажоранта $B$ є мажорантою $A$, отже множина мажорант $B$ $\\subset$ множини мажорант $A$.','Найменша мажоранта $B$ $\\ge$ найменшої мажоранти $A$, тобто $\\sup B\\ge\\sup A$.']},
+  {num:'1.Д32',title:'Найбільший елемент замкненої множини',body:'Замкнена обмежена зверху непорожня множина містить свій супремум.',why:'Коли $\\sup$ досягається — це вже $\\max$.',proof:['Нехай $M=\\sup A$. За означенням $\\exists a_n\\in A:\\ a_n\\to M$ (інакше $M$ не найменша мажоранта).','Оскільки $A$ замкнена і $a_n\\in A$, границя $M\\in A$. Отже $M=\\max A$.']},
+  {num:'1.Д36',title:'Перша властивість верхньої границі',body:'$\\varlimsup(a_n+b_n)\\le\\varlimsup a_n+\\varlimsup b_n$.',why:'Одна з двох головних оцінок для $\\varlimsup$.',proof:['$\\sup_{k\\ge n}(a_k+b_k)\\le\\sup_{k\\ge n}a_k+\\sup_{k\\ge n}b_k$.','Переходимо до границі при $n\\to\\infty$: $\\varlimsup(a_n+b_n)\\le\\varlimsup a_n+\\varlimsup b_n$.']},
+  {num:'1.Д44',title:'Топологічна властивість супремуму',body:'$\\sup A$ — границя деякої послідовності з $A$.',why:'Поєднує порядок і топологію.',proof:['Для $n\\in\\mathbb N$ знайдеться $a_n\\in A$ з $a_n>\\sup A-1/n$ (інакше $\\sup A-1/n$ — менша мажоранта).','Тоді $a_n\\le\\sup A$ і $a_n\\to\\sup A$.']}
+ ]},
+{id:'m1-cauchy',module:1,title:'Фундаментальні послідовності. Критерій Коші',
+ intro:'Критерій Коші дозволяє довести збіжність, не знаючи границі. Це один із найважливіших результатів курсу.',
+ def:'$(a_n)$ фундаментальна: $\\forall\\varepsilon>0\\ \\exists N\\ \\forall m,n>N:\\ |a_n-a_m|<\\varepsilon$.',
+ subs:[
+  {num:'1.28',title:'Фундаментальна послідовність',body:'Означення вище. У $\\mathbb R$: збіжність $\\iff$ фундаментальність.',why:'У $\\mathbb Q$ це не так — саме тому $\\mathbb R$ називають повним.'},
+  {num:'1.Д28',title:'Критерій Коші',body:'$(a_n)$ збігається $\\iff$ вона фундаментальна.',why:'Дозволяє довести збіжність без знаходження границі.',hint:'Необхідність — нерівність трикутника. Достатність — обмеженість + Б-В.',proof:['$(\\Rightarrow)$ $|a_n-a_m|\\le|a_n-a|+|a-a_m|<\\varepsilon/2+\\varepsilon/2$.','$(\\Leftarrow)$ Фундаментальна послідовність обмежена (для $\\varepsilon=1$ всі члени з $n>N_0$ лежать в околі $a_{N_0+1}$).','За Б-В існує підпослідовність $a_{n_k}\\to a$.','$|a_n-a|\\le|a_n-a_{n_k}|+|a_{n_k}-a|$: перше $<\\varepsilon/2$ при великих $n,k$, друге $<\\varepsilon/2$ при великих $k$. Отже $a_n\\to a$.']}
+ ]},
+{id:'m1-special',module:1,title:'Спеціальні границі',
+ intro:'Набір «стандартних» границь, які треба знати напам\'ять.',
+ def:'Класичні границі: $\\lim(1+1/n)^n=e$, $\\lim\\sqrt[n]{n}=1$, $\\lim\\sqrt[n]{a}=1$ ($a>0$).',
+ subs:[
+  {num:'1.11',title:'Границя кореня $n$-го степеня',body:'$\\lim_{n}\\sqrt[n]{n}=1$; $\\lim\\sqrt[n]{a}=1$ при $a>0$.',why:'Часто використовується для оцінок $\\sqrt[n]{\\cdot}$.'},
+  {num:'1.12',title:'Границя логарифмічної та степенево-показникової послідовності',body:'$\\lim\\frac{\\ln n}{n}=0$; $\\lim\\sqrt[n]{n!}=\\infty$.',why:'Логарифм росте повільніше за степінь.'},
+  {num:'1.13',title:'Границя показникової послідовності',body:'$\\lim q^n=0$ при $|q|<1$; $=1$ при $q=1$; розбіжна при $|q|>1$.',why:'Основа геометричної прогресії.'},
+  {num:'1.17',title:'Дослідити на збіжність $(1+1/n)^n$',body:'Збігається до $e$; монотонно зростає, обмежена.',why:'Класичне доведення існування $e$.'},
+  {num:'1.18',title:'Дослідити на збіжність $\\sum_{k=0}^n 1/k!$',body:'Збігається до $e$; монотонно зростає, обмежена.',why:'Альтернативне означення $e$ через ряд.'},
+  {num:'1.19',title:'Дослідити на монотонність $(1+1/n)^{n+1}$',body:'Спадна, прямує до $e$.',why:'Дозволяє оцінювати $e$ знизу і зверху.'},
+  {num:'1.33',title:'Оцінка для $\\ln(1+1/n)$',body:'$\\frac{1}{n+1}<\\ln(1+1/n)<\\frac{1}{n}$.',why:'Ключова оцінка в теорії рядів.'},
+  {num:'1.45',title:'Часткові суми о-малої послідовності',body:'Якщо $a_n=o(1)$, то $\\frac{1}{n}\\sum_{k=1}^n a_k=o(1)$.',why:'Асимптотична версія 1.Д10.'},
+  {num:'1.Д7',title:'Біном Ньютона',body:'$(a+b)^n=\\sum_{k=0}^n C_n^k a^k b^{n-k}$.',why:'Використовується для розкладу $(1+1/n)^n$ та нерівностей.',hint:'Спочатку $C_n^k+C_n^{k-1}=C_{n+1}^k$, далі індукція.',proof:['Властивість: $C_n^k+C_n^{k-1}=\\frac{n!}{k!(n-k)!}+\\frac{n!}{(k-1)!(n-k+1)!}=\\frac{n!(n+1)}{k!(n-k+1)!}=C_{n+1}^k$.','База $n=1$: $(a+b)=a+b$ — вірно.','Крок: $(a+b)^{n+1}=(a+b)\\sum_{k=0}^n C_n^k a^k b^{n-k}=\\sum C_n^k a^{k+1}b^{n-k}+\\sum C_n^k a^k b^{n+1-k}$.','Перегруповуємо: $a^{n+1}+\\sum_{k=1}^n(C_n^{k-1}+C_n^k)a^k b^{n+1-k}+b^{n+1}=\\sum_{k=0}^{n+1}C_{n+1}^k a^k b^{n+1-k}$.']},
+  {num:'1.Д11',title:'Границя кореня $n$-го степеня',body:'$\\lim\\sqrt[n]{n}=1$.',why:'Доводиться через біном Ньютона.',proof:['Нехай $\\sqrt[n]{n}=1+h_n$, $h_n>0$. Тоді $n=(1+h_n)^n\\ge\\frac{n(n-1)}{2}h_n^2$, звідки $h_n^2\\le\\frac{2}{n-1}\\to0$.','Отже $h_n\\to0$, $\\sqrt[n]{n}=1+h_n\\to1$.']},
+  {num:'1.Д12',title:'Границя логарифмічної та степенево-показникової послідовності',body:'$\\lim\\frac{\\ln n}{n}=0$.',why:'«Логарифм росте повільніше за степінь».',proof:['$\\ln n=\\int_1^n\\frac{dx}{x}\\le\\int_1^n\\frac{dx}{\\sqrt x}=2(\\sqrt n-1)<2\\sqrt n$.','Отже $0\\le\\frac{\\ln n}{n}<\\frac{2}{\\sqrt n}\\to0$.']},
+  {num:'1.Д13',title:'Границя показникової послідовності',body:'$|q|<1\\Rightarrow q^n\\to0$.',why:'Базовий факт для геометричної прогресії.',proof:['$|q|<1$, покладемо $\\alpha=1/|q|-1>0$. Тоді $1/|q|=1+\\alpha$, $(1/|q|)^n\\ge1+n\\alpha\\to\\infty$.','Отже $|q|^n\\le\\frac{1}{1+n\\alpha}\\to0$.']},
+  {num:'1.Д17',title:'Збіжність $(1+1/n)^n$ до $e$',body:'Монотонно зростає, обмежена, границя $e$.',why:'Одне з двох еквівалентних означень $e$.',proof:['$x_n=\\sum_{k=0}^n\\frac{1}{k!}\\prod_{j=1}^{k-1}(1-j/n)$ — кожен доданок зростає з $n$, кількість доданків зростає, отже $x_n$ неспадна.','$x_n\\le\\sum_{k=0}^n 1/k!\\le 1+\\sum_{k=1}^n 1/2^{k-1}<3$ — обмежена.','Отже збігається; границю позначають $e$.']},
+  {num:'1.Д18',title:'Збіжність $\\sum 1/k!$ до $e$',body:'$s_n=\\sum_{k=0}^n 1/k!\\to e$.',why:'Друге означення $e$.',proof:['$s_n$ зростає й обмежена ($<3$), тому збігається до деякого $e\'$.','$x_n\\le s_n$ (з попереднього), тому $e\\le e\'$.','З іншого боку, для фіксованого $m$: $x_n\\ge\\sum_{k=0}^m\\frac{1}{k!}(1-1/n)^k\\to s_m$, отже $e\\ge s_m$ для всіх $m$, тому $e\\ge e\'$.','Разом $e=e\'$.']},
+  {num:'1.Д19',title:'Монотонність $(1+1/n)^{n+1}$',body:'Спадна.',why:'Дозволяє отримати оцінку $e$ зверху.',proof:['Розглянемо $y_n=(1+1/n)^{n+1}$. Відношення $y_n/y_{n+1}=\\left(\\frac{(n+1)^2}{n(n+2)}\\right)^{n+1}\\cdot\\frac{n+1}{n+2}$.','За нерівністю Бернуллі $y_n>y_{n+1}$ — спадна.']},
+  {num:'1.Д33',title:'Оцінка $\\frac{1}{n+1}<\\ln(1+1/n)<\\frac{1}{n}$',body:'Класична оцінка.',why:'Ключова для гармонійного ряду і для оцінки $e$.',proof:['$\\ln(1+1/n)=\\int_n^{n+1}\\frac{dx}{x}$.','На $[n,n+1]$: $\\frac{1}{n+1}<\\frac{1}{x}<\\frac{1}{n}$, тому $\\frac{1}{n+1}<\\int_n^{n+1}\\frac{dx}{x}<\\frac{1}{n}$.']},
+  {num:'1.Д45',title:'Часткові суми о-малої послідовності',body:'$a_n=o(1)\\Rightarrow\\frac{1}{n}\\sum a_k=o(1)$.',why:'Асимптотична версія 1.Д10.'}
+ ]},
+{id:'m1-mono',module:1,title:'Монотонні послідовності',
+ intro:'Монотонність + обмеженість = збіжність. Це найпростіший спосіб довести існування границі.',
+ def:'Неспадна: $a_{n+1}\\ge a_n$. Обмежена неспадна збігається до $\\sup a_n$.',
+ subs:[
+  {num:'1.Д21',title:'Збіжність неспадної послідовності',body:'Обмежена неспадна послідовність збігається до своєї верхньої границі.',why:'Разом з 1.Д40 дає «теорему про монотонну підпослідовність».',proof:['Нехай $L=\\sup a_n<\\infty$. Для $\\varepsilon>0$ $\\exists N:\\ a_N>L-\\varepsilon$ (інакше $L-\\varepsilon$ — менша мажоранта).','Для $n>N$: $L-\\varepsilon<a_N\\le a_n\\le L$, отже $|a_n-L|<\\varepsilon$.']},
+  {num:'1.Д40',title:'Про монотонну підпослідовність',body:'З будь-якої послідовності можна виділити монотонну підпослідовність.',why:'Ще один спосіб довести Б-В.',proof:['Якщо послідовність необмежена — виділяємо зростаючу: $a_{n_k}>k$.','Якщо обмежена — за Б-В є збіжна підпослідовність; з неї можна виділити монотонну (стандартна лема).']}
+ ]},
+{id:'m1-topology',module:1,title:'Відкриті та замкнені множини',
+ intro:'Топологія прямої: відкриті, замкнені, внутрішність, замикання. Без цього не сформулювати компактність і неперервність.',
+ def:'$A$ відкрита, якщо всі її точки внутрішні; замкнена, якщо містить усі свої граничні точки.',
+ subs:[
+  {num:'1.6',title:'Відкрита множина, внутрішність, внутрішня точка',body:'$x$ — внутрішня, якщо $\\exists\\varepsilon:\\ (x-\\varepsilon,x+\\varepsilon)\\subset A$. Внутрішність — множина всіх внутрішніх точок.',why:'Відкритість — «жодна точка не на межі».'},
+  {num:'1.29',title:'Критерії відкритих множин',body:'$A$ відкрита $\\iff$ $\\forall x\\in A\\ \\exists\\varepsilon>0:\\ (x-\\varepsilon,x+\\varepsilon)\\subset A$.',why:'Робоче означення.'},
+  {num:'1.30',title:'Критерії замкнених множин',body:'$A$ замкнена $\\iff$ $A=\\bar A$ $\\iff$ $CA$ відкрита $\\iff$ границя будь-якої збіжної послідовності з $A$ належить $A$.',why:'Чотири еквівалентні означення.'},
+  {num:'1.Д24',title:'Кантора про замкнені множини',body:'Вкладені непорожні замкнені обмежені $F_1\\supset F_2\\supset\\dots$ з $d(F_n)\\to0$ мають одну спільну точку.',why:'Двоїстий до «вкладених відрізків».',proof:['Обираємо $x_n\\in F_n$. Для $m,n\\ge N$: $x_m,x_n\\in F_N$, тому $|x_m-x_n|\\le d(F_N)\\to0$ — фундаментальна.','За Коші $x_n\\to x$. Оскільки $x_n\\in F_N$ при $n\\ge N$ і $F_N$ замкнена, $x\\in F_N$ для всіх $N$.','Єдиність: якщо $y$ теж у перетині, $|x-y|\\le d(F_n)\\to0$, отже $x=y$.']},
+  {num:'1.Д29',title:'Критерії відкритих множин',body:'$A$ відкрита $\\iff$ кожна точка має окіл $\\subset A$.',why:'Те саме, що 1.29.',proof:['$(\\Rightarrow)$ За означенням. $(\\Leftarrow)$ За означенням.']},
+  {num:'1.Д30',title:'Критерії замкнених множин',body:'$A$ замкнена $\\iff$ $A=\\bar A$ $\\iff$ $CA$ відкрита.',why:'Доводимо еквівалентність трьох формулювань.',proof:['$A=\\bar A$ $\\iff$ $A$ містить усі свої точки дотику $\\iff$ $A$ замкнена.','$CA$ відкрита $\\iff$ $\\forall x\\in CA\\ \\exists\\varepsilon:\\ (x-\\varepsilon,x+\\varepsilon)\\subset CA$ $\\iff$ жодна точка $CA$ не є точкою дотику $A$.']}
+ ]},
+{id:'m1-bij',module:1,title:'Відображення: ін\'єкція, сюр\'єкція, бієкція',
+ intro:'Мова, якою описують «скільки елементів» і «чи можна обернути».',
+ def:'$f$ ін\'єктивне, якщо $f(x_1)=f(x_2)\\Rightarrow x_1=x_2$; сюр\'єктивне, якщо $E_f=Y$; бієктивне, якщо обидва.',
+ subs:[
+  {num:'1.3',title:'Бієкція, ін\'єкція, сюр\'єкція',body:'Означення вище.',why:'Бієкція — «взаємно однозначна відповідність».'},
+  {num:'1.8',title:'Відображення «В» та «НА»',body:'«В» — $D_f=X$ (в $Y$); «НА» — $D_f=X$, $E_f=Y$ (на $Y$).',why:'Різниця між «функція визначена на $X$» і «сюр\'єкція».'},
+  {num:'1.11',title:'Композиція відображень, параметричне відображення',body:'$(g\\circ f)(x)=g(f(x))$. Параметричне: $x=x(t)$, $y=y(t)$.',why:'Композиція — основа похідної складної функції.'},
+  {num:'1.14',title:'Неявне відображення',body:'Задане рівнянням $F(x,y)=0$; $y=f(x)$ — неявна функція.',why:'Приклад: $x^2+y^2=1$ задає $y=\\pm\\sqrt{1-x^2}$ неявно.'},
+  {num:'1.17',title:'Образ та прообраз елемента та множини',body:'$f(A)=\\{f(x)\\mid x\\in A\\}$; $f^{-1}(B)=\\{x\\mid f(x)\\in B\\}$.',why:'Розрізняти образ і прообраз — ключ до 1.Д1–1.Д4.'},
+  {num:'1.26',title:'Критерій бієкції',body:'$f$ бієктивне $\\iff$ $\\exists f^{-1}$.',why:'Дозволяє «перевернути» відображення.'}
+ ]},
+{id:'m1-complete',module:1,title:'Повнота $\\mathbb R$',
+ intro:'Головна властивість, яка відрізняє $\\mathbb R$ від $\\mathbb Q$.',
+ def:'$\\mathbb R$ повне: будь-яка непорожня обмежена зверху множина має супремум; будь-яка фундаментальна послідовність збігається.',
+ subs:[
+  {num:'1.22',title:'Повний УП',body:'УП повний, якщо будь-яка фундаментальна послідовність збігається.',why:'Узагальнення повноти $\\mathbb R$ на метричні простори.'},
+  {num:'1.25',title:'Приклад обмеженої множини в УП без супремуму',body:'$\\mathbb Q$: $A=\\{q\\in\\mathbb Q\\mid q^2<2\\}$ обмежена, але $\\sup A\\notin\\mathbb Q$.',why:'Класичний приклад: $\\mathbb Q$ не повне.'},
+  {num:'1.32',title:'Найбільший елемент замкненої множини',body:'Див. 1.Д32.',why:'У замкненій обмеженій множині $\\sup$ досягається.'},
+  {num:'1.42',title:'Про послідовність з обмеженою варіацією',body:'Див. 1.Д42.',why:'Корисний критерій збіжності.'},
+  {num:'1.Д9',title:'Вейєрштрасса (про точну верхню грань)',body:'Будь-яка непорожня обмежена зверху множина в $\\mathbb R$ має супремум.',why:'Аксіома повноти $\\mathbb R$.',proof:['Нехай $A\\ne\\emptyset$ обмежена зверху. Позначимо $B=\\{b\\mid b\\text{ — мажоранта }A\\}$.','Ділимо відрізок $[a_0,b_0]$ ($a_0\\in A$, $b_0\\in B$) навпіл. Якщо середина $c$ — мажоранта, беремо $[a_1,b_1]=[a_0,c]$; інакше $[a_1,b_1]=[c,b_0]$ (тоді $a_1=c\\in A$).','Отримуємо вкладені відрізки $[a_n,b_n]$, $b_n-a_n\\to0$, $a_n\\in A$, $b_n\\in B$.','Існує $s\\in\\bigcap[a_n,b_n]$, $a_n\\to s$, $b_n\\to s$. $s$ — мажоранта і найменша.']}
+ ]}
+];
+
+/* =========================================================
+   МОДУЛЬ 2 — 75 підпунктів
+   ========================================================= */
+const DATA_M2 = [
+{id:'m2-neigh',module:2,title:'Околі, граничні та ізольовані точки',
+ intro:'Локальні поняття: окіл, проколотий окіл, гранична точка, ізольована точка. На них тримаються всі означення границі та неперервності.',
+ def:'$U$ — окіл $a$, якщо $\\exists\\varepsilon>0:\\ (a-\\varepsilon,a+\\varepsilon)\\subset U$. Проколотий: $U\\setminus\\{a\\}$. $a$ — гранична точка $A$, якщо кожен проколотий окіл $a$ перетинає $A$.',
+ subs:[
+  {num:'2.22',title:'Окіл точки, проколотий окіл',body:'$U$ — окіл $a$, якщо $\\exists\\varepsilon>0:\\ (a-\\varepsilon,a+\\varepsilon)\\subset U$. Проколотий: $U\\setminus\\{a\\}$.',why:'Границя — це поведінка в проколотому околі.'},
+  {num:'2.6',title:'Гранична точка, похідна та досконала множина',body:'$a$ — гранична точка $A$, якщо кожен проколотий окіл перетинає $A$. Похідна множина $A\'$ — усі граничні точки. Досконала: $A=A\'$ (замкнена без ізольованих точок).',why:'Досконала множина — «щільна в собі». Приклад: $[0,1]$, канторова множина.'},
+  {num:'2.11',title:'Ізольована точка і зв\'язок з граничною',body:'$a\\in A$ — ізольована, якщо $\\exists$ окіл $U\\ni a$ з $U\\cap A=\\{a\\}$. Ізольована не є граничною.',why:'У ізольованій точці будь-яка функція неперервна автоматично.'},
+  {num:'2.8',title:'Еквівалентне означення точки дотику та граничної точки',body:'$a$ — точка дотику $A$ $\\iff$ кожен окіл $a$ перетинає $A$. Якщо $a\\notin A$ — це гранична точка.',why:'Точка дотику = гранична $\\cup$ сама точка, якщо вона в $A$.'},
+  {num:'2.30',title:'Функція, що задовольняє в точці умову Коші',body:'$f$ задовольняє умову Коші в $a$, якщо $\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ \\forall x,y\\in(a-\\delta,a+\\delta)\\setminus\\{a\\}:\\ |f(x)-f(y)|<\\varepsilon$.',why:'Це критерій існування границі (тема 2.Д17).'}
+ ]},
+{id:'m2-lim',module:2,title:'Границя функції в точці',
+ intro:'Два означення — Коші та Гейне — еквівалентні. На колоквіумі просять довести еквівалентність в обидва боки.',
+ def:'Коші: $\\lim_{x\\to a}f(x)=L\\iff\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ 0<|x-a|<\\delta\\Rightarrow|f(x)-L|<\\varepsilon$. Гейне: $\\forall x_n\\to a$, $x_n\\ne a$: $f(x_n)\\to L$.',
+ subs:[
+  {num:'2.4',title:'Границя функції за Гейне',body:'$\\lim_{x\\to a}f(x)=L$, якщо для будь-якої $x_n\\to a$, $x_n\\ne a$, маємо $f(x_n)\\to L$.',why:'«Мовою послідовностей» — зручно для доведень від супротивного.'},
+  {num:'2.5',title:'Границя функції за Коші',body:'$\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ 0<|x-a|<\\delta\\Rightarrow|f(x)-L|<\\varepsilon$.',why:'«Епсилон-дельта» — зручно для прямих оцінок.'},
+  {num:'2.16',title:'Ліва (права) границя функції в точці',body:'$\\lim_{x\\to a^-}f(x)=L$: $\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ a-\\delta<x<a\\Rightarrow|f(x)-L|<\\varepsilon$. Права — аналогічно.',why:'Односторонні границі — для класифікації розривів.'},
+  {num:'2.Д7',title:'Критерій існування границі через ліву та праву',body:'$\\lim_{x\\to a}f(x)$ існує $\\iff$ обидві односторонні границі існують і рівні.',why:'Робочий критерій.',proof:['$(\\Rightarrow)$ Якщо $\\lim_{x\\to a}f=L$, то і лівa, і права границі $=L$.','$(\\Leftarrow)$ Нехай $\\lim_{x\\to a^-}f=\\lim_{x\\to a^+}f=L$. Для $\\varepsilon>0$: $\\exists\\delta_1:\\ a-\\delta_1<x<a\\Rightarrow|f(x)-L|<\\varepsilon$; $\\exists\\delta_2:\\ a<x<a+\\delta_2\\Rightarrow|f(x)-L|<\\varepsilon$.','Беремо $\\delta=\\min(\\delta_1,\\delta_2)$: для $0<|x-a|<\\delta$ маємо $|f(x)-L|<\\varepsilon$.']},
+  {num:'2.Д8',title:'Зв\'язок означень границі за Коші та Гейне: Коші → Гейне',body:'Якщо $\\lim$ за Коші $=L$, то і за Гейне $=L$.',why:'Один бік еквівалентності.',proof:['Нехай $\\varepsilon>0$, $\\delta$ — з означення Коші.','Якщо $x_n\\to a$, $x_n\\ne a$, то $\\exists N:\\ \\forall n>N\\ 0<|x_n-a|<\\delta$, отже $|f(x_n)-L|<\\varepsilon$.']},
+  {num:'2.Д9',title:'Зв\'язок означень границі за Коші та Гейне: Гейне → Коші',body:'Якщо $\\lim$ за Гейне $=L$, то і за Коші $=L$.',why:'Другий бік — від супротивного.',proof:['Припустимо, що Коші хибне: $\\exists\\varepsilon_0>0\\ \\forall\\delta>0\\ \\exists x:\\ 0<|x-a|<\\delta$ і $|f(x)-L|\\ge\\varepsilon_0$.','Для $\\delta=1/n$ обираємо $x_n$: $0<|x_n-a|<1/n$, $|f(x_n)-L|\\ge\\varepsilon_0$.','Тоді $x_n\\to a$, $x_n\\ne a$, але $f(x_n)\\not\\to L$ — суперечність із Гейне.']},
+  {num:'2.Д17',title:'Критерій Коші існування границі функції в точці',body:'$\\lim_{x\\to a}f(x)$ існує (скінченна) $\\iff$ $\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ \\forall x,y\\in(a-\\delta,a+\\delta)\\setminus\\{a\\}:\\ |f(x)-f(y)|<\\varepsilon$.',why:'Дозволяє довести існування границі без її обчислення.',proof:['$(\\Rightarrow)$ $|f(x)-f(y)|\\le|f(x)-L|+|L-f(y)|<\\varepsilon/2+\\varepsilon/2=\\varepsilon$.','$(\\Leftarrow)$ Нехай $x_n\\to a$, $x_n\\ne a$. Тоді $f(x_n)$ фундаментальна. За Коші $f(x_n)\\to L$.','Незалежність від $x_n$: якщо $x_n,y_n\\to a$, то змішана $x_1,y_1,x_2,y_2,\\dots\\to a$ теж задовольняє умову.']},
+  {num:'2.Д29',title:'Про границю композиції',body:'Якщо $\\lim_{x\\to a}g(x)=b$, $\\lim_{y\\to b}f(y)=L$, і $g(x)\\ne b$ в околі $a$, то $\\lim_{x\\to a}f(g(x))=L$.',why:'Дозволяє «підставляти» границі.',proof:['Нехай $\\varepsilon>0$. $\\exists\\eta>0:\\ 0<|y-b|<\\eta\\Rightarrow|f(y)-L|<\\varepsilon$.','$\\exists\\delta_1>0:\\ 0<|x-a|<\\delta_1\\Rightarrow|g(x)-b|<\\eta$.','Оскільки $g(x)\\ne b$ в околі $a$, при $0<|x-a|<\\delta_1$ маємо $0<|g(x)-b|<\\eta$, отже $|f(g(x))-L|<\\varepsilon$.']},
+  {num:'2.Д30',title:'Про окіл граничної точки',body:'Якщо $a$ — гранична точка $A$, то кожен проколотий окіл $a$ містить нескінченно багато точок $A$.',why:'Дозволяє будувати послідовність $x_n\\in A$, $x_n\\to a$.',proof:['Нехай $U$ — проколотий окіл $a$. $U\\cap A\\ne\\emptyset$; обираємо $x_1\\in U\\cap A$.','Зменшуємо окіл; $U_2\\cap A\\ne\\emptyset$, обираємо $x_2\\ne x_1$.','Продовжуючи, отримуємо нескінченну послідовність різних точок $A$ в $U$.']},
+  {num:'2.Д31',title:'Про функції з нерівними границями-1',body:'Якщо $\\lim_{x\\to a}f_1=L_1$, $\\lim_{x\\to a}f_2=L_2$, $L_1<L_2$, то $\\exists\\delta>0:\\ \\forall x\\in(a-\\delta,a+\\delta)\\setminus\\{a\\}:\\ f_1(x)<f_2(x)$.',why:'Дозволяє зберігати строгість при граничному переході.',proof:['Нехай $\\varepsilon=(L_2-L_1)/2>0$. $\\exists\\delta_1:\\ f_1(x)<L_1+\\varepsilon=(L_1+L_2)/2$; $\\exists\\delta_2:\\ f_2(x)>L_2-\\varepsilon=(L_1+L_2)/2$.','Для $\\delta=\\min(\\delta_1,\\delta_2)$ маємо $f_1(x)<(L_1+L_2)/2<f_2(x)$.']},
+  {num:'2.Д32',title:'Про функції з нерівними границями-2',body:'Якщо $\\lim f_1=L_1$, $\\lim f_2=L_2$, $L_1<L_2$, то $\\exists\\delta>0:\\ \\forall x\\in(a-\\delta,a+\\delta)\\setminus\\{a\\}:\\ f_1(x)<f_2(x)$ (інше формулювання).',why:'Те саме, що 2.Д31.',proof:['Див. 2.Д31.']}
+ ]},
+{id:'m2-limprops',module:2,title:'Арифметичні дії з границями функцій',
+ intro:'Сума, добуток, частка — зберігаються. Плюс теорема «двох поліцаїв».',
+ def:'$\\lim(f\\pm g)=\\lim f\\pm\\lim g$; $\\lim(fg)=\\lim f\\cdot\\lim g$; $\\lim(f/g)=\\lim f/\\lim g$ при $\\lim g\\ne0$.',
+ subs:[
+  {num:'2.2',title:'Арифметичні дії з границями функцій',body:'$\\lim(f\\pm g)=\\lim f\\pm\\lim g$; $\\lim(fg)=\\lim f\\cdot\\lim g$; $\\lim(f/g)=\\lim f/\\lim g$ при $\\lim g\\ne0$.',why:'Базові правила.'},
+  {num:'2.15',title:'Лінійність рівномірної неперервності',body:'Якщо $f,g$ рівномірно неперервні, то $\\alpha f+\\beta g$ — рівномірно неперервна.',why:'Дозволяє будувати складніші функції.',proof:['Нехай $\\varepsilon>0$. $\\exists\\delta_1:\\ |x-y|<\\delta_1\\Rightarrow|f(x)-f(y)|<\\varepsilon/(2|\\alpha|)$ (якщо $\\alpha\\ne0$).','$\\exists\\delta_2:\\ |x-y|<\\delta_2\\Rightarrow|g(x)-g(y)|<\\varepsilon/(2|\\beta|)$.','Для $\\delta=\\min(\\delta_1,\\delta_2)$: $|\\alpha f(x)+\\beta g(x)-\\alpha f(y)-\\beta g(y)|\\le|\\alpha||f(x)-f(y)|+|\\beta||g(x)-g(y)|<\\varepsilon$.']},
+  {num:'2.Д40',title:'Теорема про двох поліцаїв (для функцій)',body:'Якщо $g(x)\\le f(x)\\le h(x)$ в околі $a$, $\\lim g=\\lim h=L$, то $\\lim f=L$.',why:'Головний інструмент обчислення границь затисканням.',proof:['Нехай $\\varepsilon>0$. $\\exists\\delta_1,\\delta_2$: $0<|x-a|<\\delta_1\\Rightarrow|g(x)-L|<\\varepsilon$; $0<|x-a|<\\delta_2\\Rightarrow|h(x)-L|<\\varepsilon$.','Беремо $\\delta=\\min(\\delta_1,\\delta_2,\\delta_0)$. Тоді $L-\\varepsilon<g(x)\\le f(x)\\le h(x)<L+\\varepsilon$, отже $|f(x)-L|<\\varepsilon$.']}
+ ]},
+{id:'m2-equiv',module:2,title:'Еквівалентні функції. Символи Ландау',
+ intro:'«Поведінка в межі»: $f\\sim g$, $f=o(g)$, $f=O(g)$. Незамінно при обчисленні границь.',
+ def:'$f=o(g)$ при $x\\to a$: $f/g\\to0$. $f=O(g)$: $|f/g|$ обмежене. $f\\sim g$: $f/g\\to1$.',
+ subs:[
+  {num:'2.9',title:'Еквівалентні функції, приклад',body:'$f\\sim g$ при $x\\to a$, якщо $f/g\\to1$. Приклад: $\\sin x\\sim x$, $e^x-1\\sim x$ при $x\\to0$.',why:'Еквівалентність дозволяє заміняти множники в межах.'},
+  {num:'2.28',title:'Функції одного порядку, приклад',body:'$f$ і $g$ одного порядку, якщо $f=O(g)$ і $g=O(f)$.',why:'Наприклад, $2x+1$ і $x$ — одного порядку при $x\\to\\infty$.'},
+  {num:'2.1',title:'$g=o(f)$, приклад',body:'$g=o(f)$ при $x\\to a$: $g/f\\to0$. Приклад: $x^2=o(x)$ при $x\\to0$.',why:'$o$ — «суттєво менше».'},
+  {num:'2.21',title:'Означення $g=O(f)$, приклад',body:'$g=O(f)$: $|g/f|$ обмежене в околі. Приклад: $\\sin x=O(x)$ при $x\\to0$.',why:'$O$ — «не більше ніж сталий множник».'},
+  {num:'2.Д6',title:'Достатня умова функцій одного порядку, критерій еквівалентності',body:'Якщо $f\\sim g$, то $f$ і $g$ одного порядку. Обернене хибне. Критерій: $f\\sim g\\iff f=g(1+o(1))$.',why:'Дозволяє «спрощувати» вирази в межах.',proof:['$(\\Rightarrow)$ $f\\sim g\\Rightarrow f/g\\to1\\Rightarrow f/g-1\\to0\\Rightarrow f=g(1+o(1))$.','$(\\Leftarrow)$ $f=g(1+o(1))\\Rightarrow f/g=1+o(1)\\to1\\Rightarrow f\\sim g$.']}
+ ]},
+{id:'m2-cont',module:2,title:'Неперервність функції',
+ intro:'Два означення — Коші та Гейне. Неперервність — це «границя дорівнює значенню».',
+ def:'Коші: $\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ |x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon$. Гейне: $x_n\\to a\\Rightarrow f(x_n)\\to f(a)$.',
+ subs:[
+  {num:'2.19',title:'Неперервність функції за Гейне',body:'$f$ неперервна в $a$, якщо $x_n\\to a\\Rightarrow f(x_n)\\to f(a)$.',why:'Зручно для доведень від супротивного.'},
+  {num:'2.20',title:'Неперервність функції за Коші',body:'$\\forall\\varepsilon>0\\ \\exists\\delta>0:\\ |x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon$.',why:'Зручно для прямих оцінок.'},
+  {num:'2.18',title:'Неперервність справа (зліва) функції з прикладами',body:'Справа: $\\lim_{x\\to a^+}f(x)=f(a)$. Зліва — аналогічно. Приклад: $f(x)=\\lfloor x\\rfloor$ неперервна справа, але не зліва в цілих точках.',why:'Одностороння неперервність — для функцій зі «стрибками».'},
+  {num:'2.24',title:'Рівномірна неперервність звуження',body:'Якщо $f$ рівномірно неперервна на $A$, то й на будь-якій $B\\subset A$.',why:'Звуження зберігає рівномірну неперервність.',proof:['Нехай $\\varepsilon>0$, $\\delta$ — з означення на $A$. Для $x,y\\in B\\subset A$: $|x-y|<\\delta\\Rightarrow|f(x)-f(y)|<\\varepsilon$.']},
+  {num:'2.Д23',title:'Неперервність функції в ізольованій точці',body:'Будь-яка функція неперервна в ізольованій точці своєї області визначення.',why:'Бо умова $|x-a|<\\delta$ при $x\\in D_f$ дає лише $x=a$.',proof:['Нехай $a$ ізольована, $\\exists\\varepsilon_0>0:\\ (a-\\varepsilon_0,a+\\varepsilon_0)\\cap D_f=\\{a\\}$.','Для будь-якого $\\varepsilon>0$ беремо $\\delta=\\varepsilon_0$: якщо $x\\in D_f$ і $|x-a|<\\delta$, то $x=a$, отже $|f(x)-f(a)|=0<\\varepsilon$.']}
+ ]},
+{id:'m2-osc',module:2,title:'Коливання функції в точці та на множині',
+ intro:'Кількісна міра «розкиду» значень. Через неї формулюють критерій Бера неперервності.',
+ def:'$\\omega(f,a)=\\lim_{\\delta\\to0}\\left(\\sup_{|x-a|<\\delta}f-\\inf_{|x-a|<\\delta}f\\right)$. На $E$: $\\omega(f,E)=\\sup_E f-\\inf_E f$.',
+ subs:[
+  {num:'2.12',title:'Коливання функції в точці',body:'$\\omega(f,a)=\\lim_{\\delta\\to0}\\omega(f,(a-\\delta,a+\\delta))$.',why:'$\\omega(f,a)=0\\iff f$ неперервна в $a$ (критерій Бера).'},
+  {num:'2.13',title:'Коливання функції на множині',body:'$\\omega(f,E)=\\sup_E f-\\inf_E f$.',why:'Міра «розкиду» на всій множині.'},
+  {num:'2.14',title:'Компакт',body:'$K\\subset\\mathbb R$ компактна, якщо з будь-якого відкритого покриття можна виділити скінченне підпокриття.',why:'Компакт = замкнений + обмежений (Гейне–Борель).'},
+  {num:'2.Д12',title:'Існування скінченного коливання',body:'Якщо $f$ обмежена в околі $a$, то $\\omega(f,a)<\\infty$.',why:'Коливання скінченне $\\iff$ функція локально обмежена.',proof:['Нехай $|f(x)|\\le M$ в околі $a$. Тоді $\\sup-\\inf\\le 2M$ на цьому околі.','При $\\delta\\to0$ монотонно спадає, отже границя $\\le 2M<\\infty$.']},
+  {num:'2.Д14',title:'Критерій Бера неперервності функції в точці',body:'$f$ неперервна в $a$ $\\iff$ $\\omega(f,a)=0$.',why:'Кількісний критерій неперервності.',proof:['$(\\Rightarrow)$ Для $\\varepsilon>0$ $\\exists\\delta:\\ |x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon/2$. Тоді $\\sup-\\inf\\le\\varepsilon$, отже $\\omega(f,a)\\le\\varepsilon$. Спрямовуючи $\\varepsilon\\to0$, $\\omega=0$.','$(\\Leftarrow)$ Якщо $\\omega(f,a)=0$, то $\\forall\\varepsilon>0\\ \\exists\\delta:\\ \\sup_{|x-a|<\\delta}f-\\inf_{|x-a|<\\delta}f<\\varepsilon$. Тоді для $|x-a|<\\delta$: $|f(x)-f(a)|<\\varepsilon$.']},
+  {num:'2.15b',title:'Критерій Бера неперервності через коливання',body:'Те саме, що 2.Д14.',why:'Часто формулюють окремо як «критерій Бера».'}
+ ]},
+{id:'m2-disc',module:2,title:'Типи розривів',
+ intro:'Класифікація точок розриву: усувний, стрибок, другого роду. Плюс — розриви монотонних функцій.',
+ def:'Розрив 1-го роду: обидві односторонні границі скінченні (усувний — рівні; стрибок — різні). 2-го роду: хоча б одна нескінченна або не існує.',
+ subs:[
+  {num:'2.27',title:'Типи розривів функції з прикладами',body:'Усувний: $f(x)=\\frac{\\sin x}{x}$ при $x=0$ (якщо доозначити). Стрибок: $\\mathrm{sgn}(x)$. 2-й рід: $\\sin(1/x)$ при $x\\to0$.',why:'Класифікація за поведінкою односторонніх границь.'},
+  {num:'2.Д41',title:'Типи розривів монотонної функції',body:'Монотонна функція має лише розриви 1-го роду.',why:'Бо обидві односторонні границі існують.',proof:['Нехай $f$ неспадна, $a$ — точка розриву. $\\lim_{x\\to a^-}f(x)=\\sup_{x<a}f(x)$ — скінченна.','$\\lim_{x\\to a^+}f(x)=\\inf_{x>a}f(x)$ — скінченна.','Обидві скінченні, отже розрив 1-го роду.']},
+  {num:'2.Д13',title:'Кількість розривів монотонної функції',body:'Монотонна функція має не більше ніж зліченну кількість розривів.',why:'Кожному розриву можна зіставити раціональне число.',proof:['Кожному розриву $a$ зіставимо раціональне $q_a$ між $f(a-)$ і $f(a+)$.','Різним розривам відповідають різні проміжки (бо функція монотонна), отже різні $q_a$.','Отримуємо ін\'єкцію з множини розривів у $\\mathbb Q$ — зліченність.']}
+ ]},
+{id:'m2-uniform',module:2,title:'Рівномірна неперервність',
+ intro:'Сильніша за звичайну неперервність: $\\delta$ залежить лише від $\\varepsilon$, не від точки. Ключова тема колоквіуму.',
+ def:'Коші: $\\forall\\varepsilon>0\\ \\exists\\delta>0\\ \\forall x,y:\\ |x-y|<\\delta\\Rightarrow|f(x)-f(y)|<\\varepsilon$. Гейне: $x_n-y_n\\to0\\Rightarrow f(x_n)-f(y_n)\\to0$.',
+ subs:[
+  {num:'2.7',title:'Достатня умова рівномірної неперервності',body:'Якщо $f$ неперервна на компакті, то вона рівномірно неперервна (теорема Кантора).',why:'Основна достатня умова.'},
+  {num:'2.10',title:'Зв\'язок неперервності та рівномірної неперервності',body:'Рівномірна неперервність $\\Rightarrow$ звичайна. Обернене хибне: $f(x)=x^2$ на $\\mathbb R$.',why:'Рівномірна — сильніша.'},
+  {num:'2.17',title:'Лінійність рівномірної неперервності',body:'Лінійна комбінація рівномірно неперервних — рівномірно неперервна.',why:'Дозволяє будувати складніші функції.',proof:['Див. 2.15 (той самий факт).']},
+  {num:'2.25',title:'Рівномірна неперервність функції за Гейне',body:'$x_n-y_n\\to0\\Rightarrow f(x_n)-f(y_n)\\to0$.',why:'Зручно для доведень «від супротивного».'},
+  {num:'2.26',title:'Рівномірна неперервність функції за Коші',body:'$\\forall\\varepsilon>0\\ \\exists\\delta>0\\ \\forall x,y:\\ |x-y|<\\delta\\Rightarrow|f(x)-f(y)|<\\varepsilon$.',why:'«Епсилон-дельта», але $\\delta$ не залежить від точки.'},
+  {num:'2.Д10',title:'Зв\'язок рівномірної неперервності Коші та Гейне: Коші → Гейне',body:'Якщо $f$ рівномірно неперервна за Коші, то й за Гейне.',why:'Один бік еквівалентності.',proof:['Нехай $\\varepsilon>0$, $\\delta$ — з означення Коші. Якщо $|x_n-y_n|\\to0$, то при $n>N$: $|x_n-y_n|<\\delta\\Rightarrow|f(x_n)-f(y_n)|<\\varepsilon$.']},
+  {num:'2.Д11',title:'Зв\'язок рівномірної неперервності Коші та Гейне: Гейне → Коші',body:'Якщо $f$ рівномірно неперервна за Гейне, то й за Коші.',why:'Другий бік — від супротивного.',proof:['Припустимо, що Коші хибне: $\\exists\\varepsilon_0>0\\ \\forall\\delta>0\\ \\exists x,y:\\ |x-y|<\\delta$, але $|f(x)-f(y)|\\ge\\varepsilon_0$.','Для $\\delta=1/n$ обираємо $x_n,y_n$: $|x_n-y_n|<1/n$, $|f(x_n)-f(y_n)|\\ge\\varepsilon_0$.','Тоді $x_n-y_n\\to0$, але $f(x_n)-f(y_n)\\not\\to0$ — суперечність із Гейне.']},
+  {num:'2.Д18',title:'Критерій рівномірної неперервності на інтервалі: необхідність',body:'Якщо $f$ рівномірно неперервна на $(a,b)$, то існують скінченні границі $\\lim_{x\\to a^+}f$ і $\\lim_{x\\to b^-}f$.',why:'Необхідна умова.',proof:['Нехай $\\varepsilon>0$, $\\delta$ — з означення.','Для $x_n\\to a^+$: $\\exists N:\\ \\forall n,m>N\\ |x_n-x_m|<\\delta$, отже $|f(x_n)-f(x_m)|<\\varepsilon$.','$f(x_n)$ фундаментальна, отже збігається. Отже $\\lim_{x\\to a^+}f$ існує скінченна. Аналогічно для $b^-$.']},
+  {num:'2.Д19',title:'Критерій рівномірної неперервності на інтервалі: достатність',body:'Якщо $f$ неперервна на $(a,b)$ і $\\lim_{x\\to a^+}f$, $\\lim_{x\\to b^-}f$ скінченні, то $f$ рівномірно неперервна на $(a,b)$.',why:'Достатня умова.',proof:['Продовжимо $f$ на $[a,b]$, поклавши $f(a)=\\lim_{x\\to a^+}f$, $f(b)=\\lim_{x\\to b^-}f$.','На $[a,b]$ функція неперервна, отже рівномірно неперервна (Кантор).','Звуження на $(a,b)$ рівномірно неперервне (тема 2.24).']},
+  {num:'2.Д33',title:'Рівномірна неперервність на нескінченності',body:'Якщо $f$ неперервна на $[a,\\infty)$ і $\\lim_{x\\to\\infty}f(x)$ існує скінченна, то $f$ рівномірно неперервна на $[a,\\infty)$.',why:'«Поведінка на нескінченності» може замінити компактність.',proof:['Нехай $\\varepsilon>0$. $\\exists M:\\ x>M\\Rightarrow|f(x)-L|<\\varepsilon/2$.','На $[a,M+1]$ функція рівномірно неперервна (Кантор): $\\exists\\delta_1$.','Для $x,y\\ge a$ з $|x-y|<\\delta=\\min(\\delta_1,1)$: якщо обидва $>M$ — $|f(x)-f(y)|<\\varepsilon$; якщо один $\\le M$, то обидва на $[a,M+1]$ — теж $<\\varepsilon$.']},
+  {num:'2.Д34',title:'Рівномірна неперервність на об\'єднанні',body:'Якщо $f$ рівномірно неперервна на $A$ і на $B$, і $A\\cup B$ «склеєна», то $f$ рівномірно неперервна на $A\\cup B$.',why:'Дозволяє «склеювати» проміжки.',proof:['Нехай $\\varepsilon>0$, $\\delta_A,\\delta_B$ — з рівномірної неперервності на $A,B$.','Для $x,y\\in A\\cup B$ з $|x-y|<\\delta=\\min(\\delta_A,\\delta_B)$: якщо обидва в $A$ або обидва в $B$ — все ясно.','Якщо $x\\in A$, $y\\in B$: беремо точку дотику $z\\in\\bar A\\cap\\bar B$, $|x-z|,|y-z|<\\delta$, і застосовуємо неперервність.']}
+ ]},
+{id:'m2-compact',module:2,title:'Компакти',
+ intro:'Компакт = замкнений + обмежений (у $\\mathbb R$). На компактах працюють усі основні теореми.',
+ def:'$K\\subset\\mathbb R$ компактна, якщо з будь-якого відкритого покриття можна виділити скінченне підпокриття.',
+ subs:[
+  {num:'2.14',title:'Компакт',body:'Означення вище.',why:'Узагальнює «замкнений обмежений відрізок».'},
+  {num:'2.23',title:'Приклади заперечення леми Гейне–Бореля при невиконанні однієї з умов',body:'$(0,1)$ — не замкнена, не компакт; $\\mathbb R$ — не обмежена, не компакт.',why:'Кожна умова (замкненість, обмеженість) необхідна.'},
+  {num:'2.Д16',title:'Критерій компакту',body:'$K\\subset\\mathbb R$ компакт $\\iff$ $K$ замкнена й обмежена.',why:'Це лема Гейне–Бореля.',proof:['$(\\Leftarrow)$ — доведення Гейне–Бореля (див. 2.Д20).','$(\\Rightarrow)$ Якщо $K$ необмежена — покриття $\\{(-n,n)\\}$ не має скінченного підпокриття.','Якщо $K$ не замкнена, є гранична точка $x\\notin K$; покриття $\\{\\mathbb R\\setminus[x-1/n,x+1/n]\\}$ не має скінченного підпокриття.']},
+  {num:'2.Д20',title:'Лема Гейне–Бореля',body:'$K\\subset\\mathbb R$ компакт $\\iff$ $K$ замкнена й обмежена.',why:'Найважливіша теорема про компакти.',hint:'Обмеженість — покриття кулями радіуса 1. Замкненість — покриття $\\mathbb R\\setminus[x-1/n,x+1/n]$.',proof:['$(\\Leftarrow)$ Нехай $K$ замкнена й обмежена, $\\{U_\\alpha\\}$ — відкрите покриття. Припустимо, скінченного підпокриття немає.','Ділимо відрізок навпіл; обираємо половину $I_1$, де $K\\cap I_1$ не покривається скінченно. Продовжуємо: $I_1\\supset I_2\\supset\\dots$, довжини $\\to0$.','Існує $x\\in\\bigcap I_n$; оскільки $K$ замкнена й $K\\cap I_n\\ne\\emptyset$, то $x\\in K$.','Нехай $U_{\\alpha_0}\\ni x$. Для великих $n$ $I_n\\subset U_{\\alpha_0}$, отже $K\\cap I_n$ покривається одним $U_{\\alpha_0}$ — суперечність.','$(\\Rightarrow)$ Якщо $K$ необмежена, покриття $\\{(-n,n)\\}$ не має скінченного підпокриття. Якщо $K$ не замкнена, є гранична точка $x\\notin K$; покриття $\\{\\mathbb R\\setminus[x-1/n,x+1/n]\\}$ не має скінченного підпокриття.']},
+  {num:'2.Д7b',title:'Екстремальні властивості компакту',body:'На компакті неперервна функція досягає max і min.',why:'Теорема Вейєрштрасса.',proof:['Нехай $M=\\sup_K f<\\infty$. $\\exists x_n\\in K:\\ f(x_n)\\to M$. За компактністю $x_{n_k}\\to x\\in K$.','За неперервністю $f(x)=M$. Аналогічно для мінімуму.']}
+ ]},
+{id:'m2-weier',module:2,title:'Теореми Вейєрштрасса, Кантора, Коші',
+ intro:'Три стовпи теорії неперервних функцій на компактах і проміжках.',
+ def:'Вейєрштрасс: неперервна на компакті обмежена й досягає max/min. Кантор: неперервна на компакті рівномірно неперервна. Коші: неперервна на проміжку набуває проміжних значень.',
+ subs:[
+  {num:'2.Д36',title:'Теореми Вейєрштрасса',body:'Неперервна на компакті функція обмежена й досягає своїх точних меж.',why:'Базовий результат про екстремуми.',proof:['Обмеженість: якщо $f$ необмежена, $\\exists x_n\\in K$ з $|f(x_n)|>n$. За компактністю $x_{n_k}\\to x\\in K$. За неперервністю $f(x_{n_k})\\to f(x)$ — скінченне, суперечність.','Досяжність максимуму: $M=\\sup_K f<\\infty$. $\\exists x_n:\\ f(x_n)\\to M$. Виділяємо $x_{n_k}\\to x\\in K$; тоді $f(x)=M$.']},
+  {num:'2.Д37',title:'Теорема Кантора',body:'Неперервна на компакті функція рівномірно неперервна.',why:'Основна достатня умова рівномірної неперервності.',hint:'Від супротивного: будуємо $x_n,y_n$ з $|x_n-y_n|<1/n$, але $|f(x_n)-f(y_n)|\\ge\\varepsilon_0$.',proof:['Припустимо, що $f$ не рівномірно неперервна: $\\exists\\varepsilon_0>0\\ \\forall\\delta>0\\ \\exists x,y:\\ |x-y|<\\delta$, але $|f(x)-f(y)|\\ge\\varepsilon_0$.','Для $\\delta=1/n$ обираємо $x_n,y_n$: $|x_n-y_n|<1/n$, $|f(x_n)-f(y_n)|\\ge\\varepsilon_0$.','За компактністю $x_{n_k}\\to x\\in K$. Тоді $y_{n_k}\\to x$.','За неперервністю $f(x_{n_k})\\to f(x)$, $f(y_{n_k})\\to f(x)$, отже різниця $\\to0$ — суперечність.']},
+  {num:'2.Д38',title:'Теорема Коші про корінь функції',body:'Якщо $f$ неперервна на $[a,b]$ і $f(a)f(b)<0$, то $\\exists c\\in(a,b):\\ f(c)=0$.',why:'Існування кореня за зміною знаку.',proof:['Нехай $f(a)<0<f(b)$. Покладемо $a_1=a$, $b_1=b$.','Ділимо $[a_n,b_n]$ навпіл. Якщо $f(c_n)=0$ — готово. Інакше обираємо половину зі зміною знаку.','$b_n-a_n\\to0$, існує $c\\in\\bigcap[a_n,b_n]$.','За неперервністю $f(a_n)\\le0$, $f(b_n)\\ge0$ — отже $f(c)=0$.']},
+  {num:'2.Д39',title:'Теорема Коші про проміжні значення',body:'Неперервна на $[a,b]$ функція набуває всіх проміжних значень між $f(a)$ і $f(b)$.',why:'Узагальнення попередньої теореми.',proof:['Для $\\gamma$ між $f(a)$ і $f(b)$ розглянемо $g(x)=f(x)-\\gamma$.','$g$ неперервна, $g(a)$ і $g(b)$ різних знаків, отже за теоремою про корінь $\\exists c:\\ g(c)=0$, тобто $f(c)=\\gamma$.']}
+ ]},
+{id:'m2-examples',module:2,title:'Неперервні функції: приклади',
+ intro:'Класичні приклади — Діріхле, Рімана, Кантора — показують «патології» неперервності.',
+ def:'Діріхле: $D(x)=1$ при $x\\in\\mathbb Q$, $0$ інакше. Рімана: $R(x)=1/q$ при $x=p/q$, $0$ при ірраціональних. Кантора: $\\tau$ — «сходинки» на $[0,1]$.',
+ subs:[
+  {num:'2.Д24',title:'Неперервність функції Діріхле',body:'Розривна всюди.',why:'Класичний контрприклад.',proof:['У будь-якому околі будь-якої точки є як раціональні, так і ірраціональні.','Тому $\\omega(D,x)=1$ для всіх $x$ — розривна всюди.']},
+  {num:'2.Д26',title:'Неперервність функції Рімана',body:'$R$ неперервна в ірраціональних, розривна в раціональних.',why:'Класичний приклад «неперервна на щільній множині».',proof:['У ірраціональній $x_0$: $\\forall\\varepsilon>0$ є лише скінченна кількість $q$ з $1/q\\ge\\varepsilon$; відповідні раціональні $p/q$ утворюють скінченну множину. Обираємо окіл $x_0$, вільний від них — там $R(x)<\\varepsilon$.','У раціональній $x_0=p/q$: $R(x_0)=1/q>0$, але в будь-якому околі є ірраціональні з $R=0$ — розрив.']},
+  {num:'2.Д27',title:'Неперервність, монотонність оберненої функції',body:'Якщо $f$ неперервна і строго монотонна на проміжку, то $f^{-1}$ неперервна і монотонна на $E_f$.',why:'Дозволяє «перевертати» функції.',proof:['$f^{-1}$ монотонна (обернена до монотонної).','Неперервність: нехай $y_n\\to y_0$ в $E_f$, $x_n=f^{-1}(y_n)$, $x_0=f^{-1}(y_0)$.','Якщо $x_n\\not\\to x_0$, то є підпослідовність $x_{n_k}\\to x\'\\ne x_0$ (або $\\pm\\infty$). За неперервністю $f(x_{n_k})\\to f(x\')$, але $f(x_{n_k})=y_{n_k}\\to y_0=f(x_0)$ — суперечність з ін\'єктивністю.']},
+  {num:'2.Д28',title:'Односторонні границі монотонної функції',body:'Монотонна функція в кожній точці має обидві односторонні границі (скінченні або нескінченні).',why:'Основа класифікації розривів монотонних функцій.',proof:['Нехай $f$ неспадна. $\\lim_{x\\to a^-}f(x)=\\sup_{x<a}f(x)$, $\\lim_{x\\to a^+}f(x)=\\inf_{x>a}f(x)$ — обидві існують.']}
+ ]},
+{id:'m2-squeeze',module:2,title:'Затискання та стійкість нерівностей',
+ intro:'«Двох поліцаїв» і «стійкість нерівності неперервної функції».',
+ def:'Затискання: $g\\le f\\le h$, $\\lim g=\\lim h=L\\Rightarrow\\lim f=L$. Стійкість: якщо $f(a)>0$, то $f>0$ в околі $a$.',
+ subs:[
+  {num:'2.Д35',title:'Стійкість нерівності неперервної функції',body:'Якщо $f$ неперервна в $a$ і $f(a)>0$, то $\\exists\\delta>0:\\ \\forall x\\in(a-\\delta,a+\\delta):\\ f(x)>0$.',why:'Дозволяє зберігати знак при граничному переході.',proof:['Нехай $\\varepsilon=f(a)/2>0$. $\\exists\\delta:\\ |x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon$.','Тоді $f(x)>f(a)-\\varepsilon=f(a)/2>0$.']}
+ ]},
+{id:'m2-cantor',module:2,title:'Функція Кантора $\\tau$',
+ intro:'«Сходинки» — неперервна, монотонна, але не абсолютно неперервна. Класичний приклад.',
+ def:'Будується на $[0,1]$: на середній третині $\\tau=1/2$, далі рекурсивно — $1/4$ та $3/4$ тощо. Неперервна, неспадна, похідна $=0$ майже скрізь.',
+ subs:[
+  {num:'2.29',title:'Функція Кантора $\\tau$',body:'Означення вище.',why:'Відображає канторівську множину на $[0,1]$, хоча міра множини — 0.'},
+  {num:'2.Д21',title:'Монотонність функції Кантора $\\tau$',body:'$\\tau$ неспадна.',why:'Кожна «сходинка» не спадає.',proof:['$\\tau$ — точкова границя неспадних ступінчастих функцій $\\tau_n$.','Точкова границя неспадних функцій неспадна.']},
+  {num:'2.Д25',title:'Неперервність функції Кантора $\\tau$',body:'$\\tau$ неперервна на $[0,1]$.',why:'Рівномірна границя неперервних неперервна.',proof:['$\\tau$ — рівномірна границя рівномірно неперервних ступінчастих функцій $\\tau_n$.','Рівномірна границя неперервних функцій неперервна.']}
+ ]},
+{id:'m2-extra',module:2,title:'Додаткові факти',
+ intro:'Решта теорем, які не ввійшли в основні групи.',
+ def:'Різні факти про границі, неперервність і компакти.',
+ subs:[
+  {num:'2.Д1',title:'$\\lim_{x\\to0}(1+x)^{1/x}=e$',body:'Границя дорівнює $e$.',why:'Класична границя, що узагальнює послідовнісну.',proof:['Нехай $x\\to0^+$. Покладемо $t=1/x\\to+\\infty$. Тоді $(1+x)^{1/x}=(1+1/t)^t\\to e$.','Для $x\\to0^-$: $t=1/x\\to-\\infty$, $(1+1/t)^t\\to e$ (заміна $u=-t$).','Отже двостороння границя $=e$.']},
+  {num:'2.Д2',title:'Властивості $K_3$ — типи точок',body:'Канторова множина $K_3$ складається лише з граничних точок (досконала) і не містить ізольованих.',why:'Досконала множина — «щільна в собі».',proof:['Кожна точка $K_3$ — границя послідовності точок з $K_3$ (за побудовою).','Ізольованих точок немає: будь-який окіл точки $K_3$ містить інші точки $K_3$.']},
+  {num:'2.Д3',title:'Властивості $K_3$ — потужність',body:'$K_3$ має потужність континууму.',why:'«Велика» множина, хоча міра — 0.',proof:['Кожна точка $K_3$ кодується послідовністю з $\\{0,2\\}$ — двійковим записом.','Множина таких послідовностей має потужність $2^{\\aleph_0}=c$.']},
+  {num:'2.Д4',title:'Властивості $K_3$ — замкненість',body:'$K_3$ замкнена.',why:'Перетин замкнених множин замкнений.',proof:['$K_3=\\bigcap K_n$, де $K_n$ — скінченне об\'єднання відрізків (замкнених).','Перетин замкнених — замкнений.']},
+  {num:'2.Д5',title:'Властивості $K_3$ — довжина або міра',body:'Міра $K_3$ дорівнює 0.',why:'«Велика» за потужністю, але «мала» за мірою.',proof:['На $n$-му кроці сумарна довжина $2^n\\cdot(1/3)^n=(2/3)^n\\to0$.','Отже міра $K_3=0$.']},
+  {num:'2.Д15',title:'Критерій існування границі через ліву та праву',body:'Див. 2.Д7.',why:'Те саме.'},
+  {num:'2.Д22',title:'Неперервний образ компакту',body:'Образ компакту при неперервному відображенні — компакт.',why:'Компактність зберігається.',proof:['Нехай $K$ компакт, $f$ неперервна. Розглянемо покриття $f(K)$ відкритими $V_\\alpha$.','Прообрази $f^{-1}(V_\\alpha)$ відкриті й покривають $K$.','З компактності $K$ виділяємо скінченне підпокриття $f^{-1}(V_{\\alpha_1}),\\dots,f^{-1}(V_{\\alpha_n})$.','Тоді $V_{\\alpha_1},\\dots,V_{\\alpha_n}$ — скінченне підпокриття $f(K)$.']}
+ ]}
+];
+
+/* =========================================================
+   ОБ\'ЄДНАНИЙ МАСИВ + ЛОГІКА
+   ========================================================= */
+const ALL_DATA = [...DATA_M1, ...DATA_M2];
+
+const state = {
+  mod:'all', type:'all', q:'',
+  layout: localStorage.getItem('matan_layout') || 'grid',
+  done: new Set(JSON.parse(localStorage.getItem('matan_done')||'[]'))
+};
+const $ = s=>document.querySelector(s);
+const app = $('#app');
+
+function saveDone(){ localStorage.setItem('matan_done', JSON.stringify([...state.done])); }
+function saveLayout(){ localStorage.setItem('matan_layout', state.layout); }
+
+function escapeRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+function highlight(text, q){
+  if(!q) return text;
+  try{
+    const re = new RegExp('('+escapeRe(q)+')','gi');
+    return text.replace(re,'<mark>$1</mark>');
+  }catch(e){ return text; }
+}
+function matches(text, q){ return q && text.toLowerCase().includes(q); }
+
+function applyLayout(){
+  app.classList.toggle('list', state.layout==='list');
+  app.classList.toggle('grid-mode', state.layout==='grid');
+  $('#layoutBtn').textContent = state.layout==='grid' ? '☰ Рядки' : '▦ Блоки';
+  $('#layoutBtn').classList.toggle('active', state.layout==='list');
+}
+
+function render(){
+  const q = state.q.trim().toLowerCase();
+  let topics = ALL_DATA.filter(t=>{
+    if(state.mod!=='all' && t.module!=state.mod) return false;
+    return true;
+  });
+
+  const filtered = [];
+  topics.forEach(t=>{
+    const topicMatches = q && (
+      t.title.toLowerCase().includes(q) ||
+      (t.intro||'').toLowerCase().includes(q) ||
+      (t.def||'').toLowerCase().includes(q)
+    );
+    const subMatches = (t.subs||[]).filter(s=>{
+      if(!q) return true;
+      const hay = (s.title+' '+(s.body||'')+' '+(s.why||'')+' '+(s.hint||'')+' '+(s.proof||[]).join(' ')+' '+s.num).toLowerCase();
+      return hay.includes(q);
+    });
+    const typeFilter = state.type;
+    const subFiltered = subMatches.filter(s=>{
+      if(typeFilter==='all') return true;
+      const isProof = /Д/.test(s.num);
+      return typeFilter==='proof' ? isProof : !isProof;
+    });
+    if(!q){
+      if(subFiltered.length || (t.subs||[]).length===0) filtered.push({topic:t, subs:subFiltered, topicMatches:false});
+    } else if(topicMatches || subFiltered.length){
+      filtered.push({topic:t, subs:subFiltered, topicMatches});
+    }
+  });
+
+  app.innerHTML = '';
+  const byMod = {1:[],2:[],3:[]};
+  filtered.forEach(x=>byMod[x.topic.module].push(x));
+
+  let totalSubs = 0;
+  Object.keys(byMod).forEach(m=>{
+    const arr = byMod[m];
+    if(!arr.length) return;
+    const head = document.createElement('div');
+    head.className='module-head';
+    head.innerHTML = `<h2>Модуль ${m}</h2><span class="sub">${arr.length} основних тем</span>`;
+    app.appendChild(head);
+    const grid = document.createElement('div');
+    grid.className='grid';
+    arr.forEach(({topic:t, subs, topicMatches})=>{
+      totalSubs += subs.length;
+      const isDone = state.done.has(t.id);
+      const card = document.createElement('div');
+      card.className = 'card'+(isDone?' done':'');
+      let html = `<button class="check" data-id="${t.id}" title="Позначити вивченою">✓</button>`;
+      html += `<h3>${highlight(t.title, state.q)}</h3>`;
+      html += `<div class="badges">
+        <span class="badge">Модуль ${t.module}</span>
+        <span class="badge">${(t.subs||[]).length} підпунктів</span>
+      </div>`;
+      if(t.intro) html += `<div class="intro">${highlight(t.intro, state.q)}</div>`;
+      if(t.def) html += `<div class="common-def">${highlight(t.def, state.q)}</div>`;
+
+      const subsToShow = (q && topicMatches && subs.length===0) ? (t.subs||[]) : subs;
+      subsToShow.forEach(s=>{
+        const openAttr = (q && matches((s.title+' '+(s.body||'')+' '+(s.why||'')).toLowerCase(), q)) ? ' open' : '';
+        html += `<details class="sub"${openAttr}><summary><span class="sub-num">${s.num}</span><span class="sub-title">${highlight(s.title, state.q)}</span></summary>`;
+        if(s.body) html += `<div class="sub-body"><span class="label">Формулювання:</span> ${highlight(s.body, state.q)}</div>`;
+        if(s.why) html += `<div class="why"><span class="label">Навіщо / ідея:</span> ${highlight(s.why, state.q)}</div>`;
+        if(s.hint) html += `<div class="hint"><b>Підказка:</b> ${highlight(s.hint, state.q)}</div>`;
+        if(s.proof && s.proof.length){
+          html += `<div class="sub-body"><span class="label">Доведення:</span></div>`;
+          s.proof.forEach((p,i)=>{
+            html += `<div class="proof-step"><b>${i+1}.</b> ${highlight(p, state.q)}</div>`;
+          });
+        }
+        html += `</details>`;
+      });
+      card.innerHTML = html;
+      grid.appendChild(card);
+    });
+    app.appendChild(grid);
+  });
+
+  if(filtered.length===0){
+    app.innerHTML = `<div class="empty">Нічого не знайдено за запитом «${state.q}».</div>`;
+  }
+
+  $('#matchCnt').textContent = filtered.length;
+  $('#subCnt').textContent = totalSubs;
+  $('#doneCnt').textContent = state.done.size;
+
+  document.querySelectorAll('.check').forEach(btn=>{
+    btn.onclick = ()=>{
+      const id = btn.dataset.id;
+      if(state.done.has(id)) state.done.delete(id);
+      else state.done.add(id);
+      saveDone(); render();
+    };
+  });
+
+  if(window.MathJax && window.MathJax.typesetPromise){
+    window.MathJax.typesetPromise().catch(()=>{});
+  }
+}
+
+document.querySelectorAll('#modFilters .chip[data-mod]').forEach(ch=>{
+  ch.onclick = ()=>{
+    document.querySelectorAll('#modFilters .chip[data-mod]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');
+    state.mod = ch.dataset.mod; render();
+  };
+});
+document.querySelectorAll('#modFilters .chip[data-type]').forEach(ch=>{
+  ch.onclick = ()=>{
+    document.querySelectorAll('#modFilters .chip[data-type]').forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');
+    state.type = ch.dataset.type; render();
+  };
+});
+
+let searchTimer;
+$('#q').addEventListener('input', e=>{
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(()=>{ state.q = e.target.value; render(); }, 120);
+});
+
+$('#layoutBtn').onclick = ()=>{
+  state.layout = state.layout==='grid' ? 'list' : 'grid';
+  saveLayout(); applyLayout(); render();
+};
+
+$('#themeBtn').onclick = ()=>{
+  const cur = document.body.getAttribute('data-theme');
+  const next = cur==='dark'?'light':'dark';
+  document.body.setAttribute('data-theme', next);
+  localStorage.setItem('matan_theme', next);
+  $('#themeBtn').textContent = next==='dark'?'☀️':'🌙';
+};
+const savedTheme = localStorage.getItem('matan_theme') || 'dark';
+document.body.setAttribute('data-theme', savedTheme);
+$('#themeBtn').textContent = savedTheme==='dark'?'☀️':'🌙';
+
+$('#resetBtn').onclick = ()=>{
+  if(confirm('Скинути весь прогрес?')){
+    state.done.clear(); saveDone(); render();
+  }
+};
+
+applyLayout();
+render();
+</script>
+</body>
+</html>
